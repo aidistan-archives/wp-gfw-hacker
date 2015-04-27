@@ -15,6 +15,7 @@ task :default do
 
   # Build
   (`git ls-files`.split("\n") - EXCLUDE).each do |src|
+    next unless File.exist?(src)
     dst = 'insideGFW/' + src
     FileUtils.mkdir_p(File.dirname(dst)) unless Dir.exist?(File.dirname(dst))
     FileUtils.cp(src, dst)
