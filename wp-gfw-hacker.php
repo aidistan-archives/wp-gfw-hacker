@@ -1,10 +1,10 @@
 <?php
 /*
-  Plugin Name: insideGFW
-  Plugin URI: https://github.com/aidistan/wp-insideGFW
+  Plugin Name: GFW Hacker
+  Version: 0.4.0
   Description: 为墙内的 WordPress 站点而生
+  Plugin URI: https://github.com/aidistan/wp-gfw-hacker
   Author: Aidi Stan
-  Version: 0.3
   Author URI: http://github.com/aidistan/
 */
 
@@ -12,21 +12,21 @@ define('BASE_PATH', dirname(__FILE__));
 require_once(BASE_PATH . '/geo/geoip.inc');
 
 // 匹配出css、js、图片地址
-function igfw_replace_url($str){
+function gfwh_replace_url($str){
   $geoData     = geoip_open(BASE_PATH . '/geo/GeoIP.dat', GEOIP_STANDARD);
   $countryCode = geoip_country_code_by_addr($geoData, $_SERVER['REMOTE_ADDR']);
   geoip_close($geoData);
 
   if( $countryCode === 'CN' ) {
     $regexp = "/<(link|script|img)([^<>]+)>/i";
-    $str = preg_replace_callback( $regexp, "igfw_replace_callback", $str );
+    $str = preg_replace_callback( $regexp, "gfwh_replace_callback", $str );
   }
 
   return $str;
 }
 
 // 匹配需要替换掉的链接地址
-function igfw_replace_callback($matches) {
+function gfwh_replace_callback($matches) {
   $str = $matches[0];
 
   $patterns = array();
@@ -49,12 +49,12 @@ function igfw_replace_callback($matches) {
   return preg_replace($patterns, $replacements, $str);
 }
 
-function igfw_buffer_start() {
+function gfwh_buffer_start() {
   //开启缓冲
-  ob_start("igfw_replace_url");
+  ob_start("gfwh_replace_url");
 }
 
-function igfw_buffer_end() {
+function gfwh_buffer_end() {
   // 关闭缓冲
   ob_end_flush();
 }
@@ -64,7 +64,7 @@ function igfw_buffer_end() {
 * 也可以尝试添加到其他动作，只要内容输出在两个动作之间即可
 * 参考链接：http://codex.wordpress.org/Plugin_API/Action_Reference
 */
-add_action('init',     'igfw_buffer_start');
-add_action('shutdown', 'igfw_buffer_end');
+add_action('init',     'gfwh_buffer_start');
+add_action('shutdown', 'gfwh_buffer_end');
 
 ?>
