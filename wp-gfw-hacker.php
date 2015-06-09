@@ -19,7 +19,7 @@ function gfwh_replace_url($str){
 
   if( $countryCode === 'CN' ) {
     $regexp = "/<(link|script|img)([^<>]+)>/i";
-    $str = preg_replace_callback( $regexp, "gfwh_replace_callback", $str );
+    $str = preg_replace_callback($regexp, "gfwh_replace_callback", $str);
   }
 
   return $str;
