@@ -1,7 +1,7 @@
 <?php
 /*
   Plugin Name: GFW Hacker
-  Version: 0.4.0
+  Version: 0.4.1
   Description: 为墙内的 WordPress 站点而生
   Plugin URI: https://github.com/aidistan/wp-gfw-hacker
   Author: Aidi Stan
