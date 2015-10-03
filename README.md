@@ -2,7 +2,7 @@
 
 为墙内的 WordPress 站点而生，目前已集成以下功能：
 
-1. 修复 Google 字体**（谷歌服务已恢复，该功能暂时关闭）**
+1. 修复 Google 字体
   - 解决办法：通过中科大 CDN 代理获取 Google 字体
   - 参考
     - [zjhzxhz/google-font-fix](https://github.com/zjhzxhz/google-font-fix)
